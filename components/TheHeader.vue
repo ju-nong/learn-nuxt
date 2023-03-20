@@ -46,7 +46,7 @@
             :class="{ show: hamburgerConfig.isShow }"
         >
             <div
-                class="hamburger-side flex flex-col w-[200px] h-full float-right bg-white z-[899] relative"
+                class="hamburger-side flex flex-col w-[200px] h-full float-right bg-white z-[899] relative gap-y-4 py-4"
             >
                 <div
                     v-for="(link, index) in links"
@@ -57,7 +57,7 @@
 
                     <ul
                         v-if="link.sub.length"
-                        class="hamburger-menu-sub text-center w-full absolute top-[100%] left-0 opacity-0 pointer-events-none pt-4"
+                        class="hamburger-menu-sub text-center w-full"
                     >
                         <li
                             v-for="(sublink, subIndex) in link.sub"
@@ -71,7 +71,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="absolute w-full h-full bg-black/[0.6] z-[898]"></div>
+            <div
+                class="hamburger-background absolute w-full h-full bg-black/[0.6] z-[898]"
+                @click="hamburgerConfig.isShow = false"
+            ></div>
         </div>
     </header>
 </template>

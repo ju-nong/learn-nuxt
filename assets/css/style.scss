@@ -2,6 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes hamburger-menu-init {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes hamburger-side-show {
+    0% {
+        right: -200px;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes hamburger-side-hide {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: -200px;
+    }
+}
+
+@keyframes hamburger-background-show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hamburger-background-hide {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,14 +58,16 @@ header {
     nav {
         display: flex;
 
-        .header-menu-sub {
-            transition: opacity 0.3s;
-        }
-
-        .header-menu:hover {
+        .header-menu {
             .header-menu-sub {
-                opacity: 1;
-                pointer-events: auto;
+                transition: opacity 0.3s;
+            }
+
+            &:hover {
+                .header-menu-sub {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
             }
         }
     }
@@ -29,15 +76,49 @@ header {
         display: none;
     }
 
-    // .hamburger-menu-container {
-    //     display: flex;
-    //     right: -200px;
-    //     transition: right 0.5s;
-    // }
+    .hamburger-menu-container {
+        pointer-events: none;
+        display: none;
 
-    // .hamburger-menu-container.show {
-    //     right: 0px;
-    // }
+        animation-name: hamburger-menu-init;
+        animation-duration: 0.5s;
+
+        .hamburger-side {
+            right: -200px;
+            animation-name: hamburger-side-hide;
+            animation-duration: 0.5s;
+
+            .hamburger-menu {
+                .hamburger-menu-sub {
+                    overflow: hidden;
+                    height: 0px;
+                    transition: height 0.3s;
+                }
+            }
+        }
+
+        .hamburger-background {
+            opacity: 0;
+            animation-name: hamburger-background-hide;
+            animation-duration: 0.5s;
+        }
+
+        &.show {
+            pointer-events: auto;
+
+            .hamburger-side {
+                right: 0;
+                animation-name: hamburger-side-show;
+                animation-duration: 0.5s;
+            }
+
+            .hamburger-background {
+                opacity: 1;
+                animation-name: hamburger-background-show;
+                animation-duration: 0.5s;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -48,6 +129,10 @@ header {
 
         .hamburger-button {
             display: flex;
+        }
+
+        .hamburger-menu-container {
+            display: block;
         }
     }
 }
